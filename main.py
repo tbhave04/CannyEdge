@@ -5,6 +5,16 @@ from PIL import Image
 def read_image(image_path):
     return plt.imread(image_path)
 
+def display_images(images, titles):
+    num_images = len(images)
+    plt.figure(figsize=(12, 6))
+    for i in range(num_images):
+        plt.subplot(1, num_images, i+1)
+        plt.imshow(images[i], cmap='gray')
+        plt.title(titles[i])
+        plt.axis('off')
+    plt.show()
+
 def apply_gaussian_blur(grayscale_image):
     imgarray = np.array(grayscale_image)
     kernel = np.array([[1/16, 2/16, 1/16], [2/16, 4/16, 2/16], [1/16, 2/16, 1/16]])
@@ -98,10 +108,9 @@ def canny_edge_detection(image_path, kernel_size=5, sigma=1, low_threshold_ratio
 
     # Task 6
     final_edges = hysteresis(strong_edges, weak_edges)
-
-    img = Image.fromarray(final_edges)
-    img.show()
+    
+    display_images([original_image, final_edges], "Original vs. Final")
 
 if __name__ == "__main__":
-    image_path = 'butter.jpg'
+    image_path = 'chic.jpg'
     canny_edge_detection(image_path)
