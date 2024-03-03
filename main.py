@@ -88,9 +88,10 @@ def hysteresis(strong_edges, weak_edges):
                     weak_edges[i, j] = 0
     return strong_edges
 
-def canny_edge_detection(image_path, kernel_size=5, sigma=1, low_threshold_ratio=0.05, high_threshold_ratio=0.09):
+def canny_edge_detection(kernel_size=5, sigma=1, low_threshold_ratio=0.05, high_threshold_ratio=0.09):
     # Task 1
-    original_image = read_image(image_path)
+    image = input("Enter an image path: ")
+    original_image = read_image(image)
     grayscale_image = np.mean(original_image, axis=2)
 
     # Task 2
@@ -112,5 +113,4 @@ def canny_edge_detection(image_path, kernel_size=5, sigma=1, low_threshold_ratio
     display_images([original_image, final_edges], "Original vs. Final")
 
 if __name__ == "__main__":
-    image_path = 'chic.jpg'
-    canny_edge_detection(image_path)
+    canny_edge_detection()
